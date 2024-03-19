@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp
+namespace ConsoleApp
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +10,13 @@
     public class DataReader
     {
         IEnumerable<ImportedObject> ImportedObjects;
+        StreamReader streamReader;
 
         public void ImportAndPrintData(string fileToImport, bool printData = true)
         {
             ImportedObjects = new List<ImportedObject>() { new ImportedObject() };
 
-            var streamReader = new StreamReader(fileToImport);
+            streamReader = new StreamReader(fileToImport);
 
             var importedLines = new List<string>();
             while (!streamReader.EndOfStream)
@@ -42,28 +43,15 @@
                     ((List<ImportedObject>)ImportedObjects).Add(importedObject);
                 }
             }
-            int countedTimes = 1;
                 // clear and correct imported data
                 foreach (var importedObject in ImportedObjects)
             {
-                if (importedObject.Type != null)
+                if (importedObject.Type != null && importedObject.Name != null && importedObject.Schema != null && importedObject.ParentName != null && importedObject.ParentType != null)
                 {
                     importedObject.Type = importedObject.Type.Trim().Replace(" ", "").Replace(Environment.NewLine, "").ToUpper();
-                }
-                if (importedObject.Name != null)
-                {
                     importedObject.Name = importedObject.Name.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                }
-                if (importedObject.Schema != null)
-                {
                     importedObject.Schema = importedObject.Schema.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                }
-                if (importedObject.ParentName != null)
-                {
                     importedObject.ParentName = importedObject.ParentName.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                }
-                if (importedObject.ParentType != null)
-                {
                     importedObject.ParentType = importedObject.ParentType.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
                 }
             }
