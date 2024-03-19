@@ -1,0 +1,7 @@
+Wrong .csv file name (dataa.cvs should be data.cvs)
+For loop in importedLines.Count changed to iterate to importedLines.Count-1
+streamreader changed to DataReader class from void
+Blank lines, and lines that do not have enough data from cvs file are ignored
+If not null checks were added to "//clear and correct imported data"
+if (table.ParentType != null) check added to "//print all database's tables" and "//print all table's columns"
+Added new keyword to Name in ImportedObject class
